@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "id": "motionviewer",
+  "version": "${version}",
+
+  "name": "Motion Viewer",
+  "description": "Display motion data in debug HUD",
+  "authors": [
+    "UltimateBoomer"
+  ],
+  "contact": {
+    "homepage": "https://fabricmc.net/",
+    "sources": "https://github.com/FabricMC/fabric-example-mod"
+  },
+
+  "license": "MIT",
+  "icon": "assets/motionviewer/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "io.github.ultimateboomer.motionviewer.MotionViewer"
+    ]
+  },
+  "mixins": [
+    "motionviewer.mixins.json"
+  ],
+
+  "depends": {
+    "fabric": "*",
+    "java": ">=17"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
