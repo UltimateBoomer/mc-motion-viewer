@@ -85,27 +85,14 @@ public class MotionStatHandler {
         return Objects.requireNonNullElse(aQ.get(0), Vec3d.ZERO).getComponentAlongAxis(axis);
     }
 
-    /**
-     * @param axis axis
-     * @return speed in m/s
-     */
     public double getAverageAccelerationOnAxis(Direction.Axis axis) {
         return aQ.stream().mapToDouble(a -> a.getComponentAlongAxis(axis)).average().orElse(0);
     }
 
-    /**
-     * @param axis normal axis
-     * @return speed in m/s
-     */
     public double getCurrentAccelerationOnPlane(Direction.Axis axis) {
         return Objects.requireNonNullElse(aQ.get(0), Vec3d.ZERO).withAxis(axis, 0).length();
     }
 
-    /**
-     * Get mean speed on plane in buffer interval based on position data
-     * @param axis normal axis
-     * @return speed in m/s
-     */
     public double getAverageAccelerationOnPlane(Direction.Axis axis) {
         return aQ.stream().mapToDouble(a -> a.withAxis(axis, 0).length()).average().orElse(0);
     }
