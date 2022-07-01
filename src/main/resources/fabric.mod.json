@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "io.github.ultimateboomer.motionviewer.MotionViewer"
+    ],
+    "modmenu": [
+      "io.github.ultimateboomer.motionviewer.config.MotionViewerModMenu"
     ]
   },
   "mixins": [

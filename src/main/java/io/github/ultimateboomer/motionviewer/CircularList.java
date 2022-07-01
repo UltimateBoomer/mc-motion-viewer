@@ -2,6 +2,9 @@ package io.github.ultimateboomer.motionviewer;
 
 import java.util.AbstractList;
 
+/**
+ * Circular buffer implementation
+ */
 @SuppressWarnings("unchecked")
 public class CircularList<E> extends AbstractList<E> {
 
