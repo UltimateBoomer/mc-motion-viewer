@@ -17,7 +17,6 @@ public class DebugHudMixin {
     @Inject(method = "getLeftText", at = @At(value = "RETURN"))
     protected void onGetLeftText(CallbackInfoReturnable<List<String>> cir) {
         var config = MotionViewer.getInstance().getConfig();
-        if (!config.showVelocity || !config.showAccel) return;
 
         var motionStatHandler = MotionViewer.getInstance().getMotionStatHandler();
         List<String> content = new ObjectArrayList<>();
@@ -27,9 +26,11 @@ public class DebugHudMixin {
             double vY = motionStatHandler.getCurrentSpeedOnAxis(Direction.Axis.Y);
             double vZ = motionStatHandler.getCurrentSpeedOnAxis(Direction.Axis.Z);
             double vXYZ = motionStatHandler.getCurrentSpeed();
+            double vXYZAvg = motionStatHandler.getAverageSpeed();
             double vXZ = motionStatHandler.getCurrentSpeedOnPlane(Direction.Axis.Y);
-            content.add(String.format(Locale.ROOT, "vXYZ: %.3f / %.3f / %.3f (%.3f), vXZ: %.3f",
-                    vX, vY, vZ, vXYZ, vXZ));
+            double vXZAvg = motionStatHandler.getAverageSpeedOnPlane(Direction.Axis.Y);
+            content.add(String.format(Locale.ROOT, "vXYZ: %.3f / %.3f / %.3f (m: %.3f, avg: %.3f), vXZ: %.3f (avg: %.3f)",
+                    vX, vY, vZ, vXYZ, vXYZAvg, vXZ, vXZAvg));
         }
         if (config.showAccel) {
             double aX = motionStatHandler.getCurrentAccelerationOnAxis(Direction.Axis.X);
@@ -37,7 +38,7 @@ public class DebugHudMixin {
             double aZ = motionStatHandler.getCurrentAccelerationOnAxis(Direction.Axis.Z);
             double aXYZ = motionStatHandler.getCurrentAcceleration();
             double aXZ = motionStatHandler.getCurrentAccelerationOnPlane(Direction.Axis.Y);
-            content.add(String.format(Locale.ROOT, "aXYZ: %.3f / %.3f / %.3f (%.3f), vXZ: %.3f",
+            content.add(String.format(Locale.ROOT, "aXYZ: %.3f / %.3f / %.3f (m: %.3f), aXZ: %.3f",
                     aX, aY, aZ, aXYZ, aXZ));
         }
 
